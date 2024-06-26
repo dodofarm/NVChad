@@ -6,12 +6,13 @@
 local M = {}
 
 M.base46 = {
-	theme = "onedark",
+	theme = "solarized_osaka",
 
-	-- hl_override = {
-	-- 	Comment = { italic = true },
-	-- 	["@comment"] = { italic = true },
-	-- },
+  hl_override = {
+    Comment = { italic = true },
+    ["@comment"] = { italic = true },
+    SpecialComment = { italic = true },
+  },
 }
-
+-- M.plugins = "./plugins/init.lua"
 return M
