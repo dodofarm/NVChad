@@ -1,40 +1,40 @@
 return {
-  {
-    "glacambre/firenvim",
-    lazy = not vim.g.started_by_firenvim,
-    module = false,
-    build = function()
-      vim.fn["firenvim#install"](0)
-    end,
-    config = function()
-      vim.api.nvim_create_autocmd("UIEnter", {
-        callback = function()
-          local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
-          if client ~= nil and client.name == "Firenvim" then
-            vim.o.guifont = "VictorMono Nerd Font:h13"
-            vim.o.laststatus = 1
-            vim.o.ruler = false
-            vim.keymap.set("n", "<Esc><Esc>", "<Cmd>call firenvim#focus_page()<Cr>", {})
-            vim.keymap.set("n", "<C-z>", "<Cmd>call firenvim#hide_frame()<Cr>", {})
-          end
-        end,
-      })
-      vim.g.firenvim_config = {
-        localSettings = {
-          [".*"] = {
-            filename = "/tmp/{hostname}_{pathname%10}.txt",
-          },
-          ["https?://leetcode\\.com"] = {
-            filename = "/tmp/{hostname}_{pathname%10}.java",
-          },
-        },
-      }
-      -- vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
-      --   nested = true,
-      --   command = "write",
-      -- })
-    end,
-  },
+  -- {
+  --   "glacambre/firenvim",
+  --   lazy = not vim.g.started_by_firenvim,
+  --   module = false,
+  --   build = function()
+  --     vim.fn["firenvim#install"](0)
+  --   end,
+  --   config = function()
+  --     vim.api.nvim_create_autocmd("UIEnter", {
+  --       callback = function()
+  --         local client = vim.api.nvim_get_chan_info(vim.v.event.chan).client
+  --         if client ~= nil and client.name == "Firenvim" then
+  --           vim.o.guifont = "VictorMono Nerd Font:h13"
+  --           vim.o.laststatus = 1
+  --           vim.o.ruler = false
+  --           vim.keymap.set("n", "<Esc><Esc>", "<Cmd>call firenvim#focus_page()<Cr>", {})
+  --           vim.keymap.set("n", "<C-z>", "<Cmd>call firenvim#hide_frame()<Cr>", {})
+  --         end
+  --       end,
+  --     })
+  --     vim.g.firenvim_config = {
+  --       localSettings = {
+  --         [".*"] = {
+  --           filename = "/tmp/{hostname}_{pathname%10}.txt",
+  --         },
+  --         ["https?://leetcode\\.com"] = {
+  --           filename = "/tmp/{hostname}_{pathname%10}.java",
+  --         },
+  --       },
+  --     }
+  --     -- vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+  --     --   nested = true,
+  --     --   command = "write",
+  --     -- })
+  --   end,
+  -- },
   -- Need to figure out later how to implement noice with nvchad
   -- {
   --   "folke/noice.nvim",
@@ -99,13 +99,6 @@ return {
     "mfussenegger/nvim-jdtls",
   },
   {
-    "neovim/nvim-lspconfig",
-    config = function()
-      require("nvchad.configs.lspconfig").defaults()
-      require "configs.lspconfig"
-    end,
-  },
-  {
     "mfussenegger/nvim-lint",
     enabled = true,
     event = "VeryLazy",
@@ -123,24 +116,15 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-        "html-lsp",
-        "css-lsp",
-        "pyright",
-        "prettier",
-        "clangd",
-        "clang-format",
-        "mypy",
-        "ruff",
-        "debugpy",
-        "isort",
-        "black",
-        "jdtls",
-      },
+    event = "VeryLazy",
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
     },
+    config = function()
+      require "configs.mason"
+      require "configs.lspconfig"
+    end,
   },
   --
   {
@@ -161,6 +145,11 @@ return {
     },
   },
   { "ThePrimeagen/vim-be-good" },
+  {
+    "marcussimonsen/let-it-snow.nvim",
+    cmd = "LetItSnow", -- Wait with loading until command is run
+    opts = {},
+  },
   -- { "hrsh7th/cmp-cmdline" },
   -- { "hrsh7th/cmp-path" },
 }
