@@ -146,6 +146,39 @@ return {
   },
   { "ThePrimeagen/vim-be-good" },
   {
+    "sphamba/smear-cursor.nvim",
+    lazy = false,
+    opts = {
+      min_horizontal_distance_smear = 10,
+      min_vertical_distance_smear = 2,
+      -- faster animations: -- Default  Range
+      -- stiffness = 0.8, -- 0.6      [0, 1]
+      -- trailing_stiffness = 0.5, -- 0.3      [0, 1]
+      -- distance_stop_animating = 0.5, -- 0.1      > 0
+      -- hide_target_hack = false, -- true     boolean
+    },
+  },
+  {
+    "karb94/neoscroll.nvim",
+    opts = {},
+    config = function()
+      require("neoscroll").setup()
+    end,
+  },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {},
+  -- stylua: ignore
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
+      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+    },
+  },
+  {
     "marcussimonsen/let-it-snow.nvim",
     cmd = "LetItSnow", -- Wait with loading until command is run
     opts = {},

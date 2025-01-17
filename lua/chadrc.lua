@@ -5,6 +5,7 @@
 ---@type ChadrcConfig
 local M = {}
 
+-- size of vertical terminal
 M.term = {
   sizes = {
     vsp = 0.35,

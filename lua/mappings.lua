@@ -3,10 +3,24 @@ require "nvchad.mappings"
 -- add yours here
 
 local map = vim.keymap.set
-local opts = { noremap = true, silent = true }
 
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map("i", "jk", "<ESC>")
+
+-- neoscroll mappings
+local neoscroll = require "neoscroll"
+-- stylua: ignore
+for _, mode in ipairs { "n", "v", "x" } do
+  map(mode, "<C-u>", function() neoscroll.ctrl_u { duration = 50 } end, { desc = "Scroll half page up" })
+  map(mode, "<C-d>", function() neoscroll.ctrl_d { duration = 50 } end, { desc = "Scroll half page down" })
+  map(mode, "<C-b>", function() neoscroll.ctrl_b { duration = 450 } end, { desc = "Scroll page up" })
+  map(mode, "<C-f>", function() neoscroll.ctrl_f { duration = 450 } end, { desc = "Scroll page down" })
+  map(mode, "<C-y>", function() neoscroll.scroll(-0.1, { move_cursor = false, duration = 100 }) end, { desc = "Scroll up small" })
+  map(mode, "<C-e>", function() neoscroll.scroll(0.1, { move_cursor = false, duration = 100 }) end, { desc = "Scroll down small" })
+  map(mode, "zt", function() neoscroll.zt { half_win_duration = 250 } end, { desc = "Scroll cursor to top" })
+  map(mode, "zz", function() neoscroll.zz { half_win_duration = 250 } end, { desc = "Scroll cursor to center" })
+  map(mode, "zb", function() neoscroll.zb { half_win_duration = 250 } end, { desc = "Scroll cursor to bottom" })
+end
 
 -- DAP
 map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "DAP Add breakpoint at line" })
