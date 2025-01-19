@@ -169,6 +169,10 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     opts = {},
+    config = function()
+      dofile(vim.g.base46_cache .. "flash")
+      require("flash").setup()
+    end,
   -- stylua: ignore
     keys = {
       { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
@@ -177,6 +181,23 @@ return {
       { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
       { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
     },
+  },
+  {
+    "kawre/leetcode.nvim",
+    build = ":TSUpdate html", -- if `nvim-treesitter` installed
+    cmd = "Leet", -- only load plugin for this command
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+    opts = {},
+  },
+  {
+    "folke/todo-comments.nvim",
+    lazy = false, -- potentially instead of always loading add a toggle command
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {},
   },
   {
     "marcussimonsen/let-it-snow.nvim",
