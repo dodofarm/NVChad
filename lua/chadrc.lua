@@ -14,12 +14,22 @@ M.term = {
 }
 
 M.base46 = {
-  theme = "solarized_osaka",
+  transparency = true,
+  theme = "yoru",
+  integrations = {
+    "flash",
+  },
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
     SpecialComment = { italic = true },
   },
+}
+
+local ascii_headers = require "ascii-headers"
+M.nvdash = {
+  load_on_startup = true,
+  header = ascii_headers.get_random_header(),
 }
 -- M.plugins = "./plugins/init.lua"
 return M
