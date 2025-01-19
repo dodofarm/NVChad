@@ -171,7 +171,6 @@ return {
     opts = {},
     config = function()
       dofile(vim.g.base46_cache .. "flash")
-      require("flash").setup()
     end,
   -- stylua: ignore
     keys = {
