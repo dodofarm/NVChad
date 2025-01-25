@@ -53,44 +53,39 @@ return {
   -- },
   {
     "stevearc/conform.nvim",
-    event = "BufWritePre", -- uncomment for format on save
+    event = "BufWritePre", -- format on save
     opts = require "configs.conform",
   },
   {
-    "rcarriga/nvim-dap-ui",
-    dependencies = "mfussenegger/nvim-dap",
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      -- "williamboman/mason.nvim",
+      -- "jay-babu/mason-nvim-dap.nvim", -- disabled since not working
+      "nvim-neotest/nvim-nio",
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+    },
     config = function()
-      local dap = require "dap"
-      local dapui = require "dapui"
-      dapui.setup()
-      dap.listeners.after.event_initialized["dapui_config"] = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated["dapui_config"] = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited["dapui_config"] = function()
-        dapui.close()
-      end
+      require "configs.dap"
     end,
   },
   {
     "mfussenegger/nvim-dap-python",
+    -- potentially load with "cond" + "keys" so that the debugger is launched
+    -- only when the debug keys are hit AND it's a python file
     ft = "python",
     dependencies = {
       "mfussenegger/nvim-dap",
-      "rcarriga/nvim-dap-ui",
-      "nvim-neotest/nvim-nio",
     },
-    config = function(_, opts)
+    config = function()
+      -- currently using mason-nvim-dap doesn't work
       local path = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
       require("dap-python").setup(path)
-      -- require("core.utils").load_mappings "dap_python"
     end,
   },
-  -- might want to figure out lateer how to use nvim-java with DAP, Lombok etc.
   {
     "mfussenegger/nvim-jdtls",
+    ft = "java", -- same as above for nvim-dap-python
   },
   {
     "mfussenegger/nvim-lint",
@@ -109,18 +104,11 @@ return {
     end,
   },
   {
-    "williamboman/mason.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "williamboman/mason-lspconfig.nvim",
-      "neovim/nvim-lspconfig",
-    },
+    "neovim/nvim-lspconfig",
     config = function()
-      require "configs.mason"
       require "configs.lspconfig"
     end,
   },
-  --
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
