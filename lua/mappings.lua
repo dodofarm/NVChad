@@ -7,6 +7,7 @@ local map = vim.keymap.set
 map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-c>", "<esc>", { desc = "Make Ctrl+C behave exactly like escape." })
 map("i", "jk", "<ESC>")
+map("n", "<C-t>", "<cmd> tabnew <CR>", { desc = "Opens a new tab" })
 
 -- neoscroll mappings
 local neoscroll = require "neoscroll"
@@ -30,7 +31,7 @@ map("n", "<leader>dsi", "<cmd> DapStepIn <CR>", { desc = "DAP Step in" })
 map("n", "<leader>dc", "<cmd> DapContinue <CR>", { desc = "DAP Continue" })
 map("n", "<leader>dt", "<cmd> DapTerminate <CR>", { desc = "DAP Terminate" })
 
-map("n", "<leader>y", [[:lua YankDiagnosticError()<CR>]], { noremap = true, silent = true, desc = "Copy error" })
+map("n", "<leader>y", [[:lua YankDiagnosticError()<CR>]], { noremap = true, silent = true, desc = "Copy LSP error" })
 
 function YankDiagnosticError()
   vim.diagnostic.open_float()
