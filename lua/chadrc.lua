@@ -17,12 +17,24 @@ M.base46 = {
   transparency = true,
   theme = "yoru",
   integrations = {
+    "bufferline",
+    "todo",
     "flash",
+    "dap",
   },
   hl_override = {
     Comment = { italic = true },
     ["@comment"] = { italic = true },
     SpecialComment = { italic = true },
+  },
+}
+
+M.mason = {
+  pkgs = {
+    "debugpy",
+    "jdtls",
+    "java-debug-adapter",
+    "java-test",
   },
 }
 

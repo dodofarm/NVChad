@@ -149,9 +149,9 @@ return {
   },
   {
     "folke/flash.nvim",
-    event = "VeryLazy",
     opts = {},
     config = function()
+      require("base46").get_integration "flash"
       dofile(vim.g.base46_cache .. "flash")
     end,
   -- stylua: ignore
@@ -175,10 +175,16 @@ return {
     opts = {},
   },
   {
+    -- TODO: potentially add lowercase version and also remove the need to add a ":"
     "folke/todo-comments.nvim",
-    lazy = false, -- potentially instead of always loading add a toggle command
+    event = "VeryLazy", -- potentially instead of always loading add a toggle command
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {},
+    config = function()
+      require("base46").get_integration "todo"
+      dofile(vim.g.base46_cache .. "todo")
+      require("todo-comments").setup()
+    end,
   },
   {
     "marcussimonsen/let-it-snow.nvim",
