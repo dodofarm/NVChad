@@ -57,6 +57,7 @@ local config = {
 
   -- This is the default if not provided, you can remove it. Or adjust as needed.
   -- One dedicated LSP server & client will be started per unique root_dir
+  -- maybe add `or vim.fn.getcwd()` so that the current dir can be used as the root?
   root_dir = require("jdtls.setup").find_root { ".git", "mvnw", "pom.xml", "build.gradle" },
 
   -- Here you can configure eclipse.jdt.ls specific settings

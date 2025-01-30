@@ -26,12 +26,14 @@ end
 
 -- DAP
 map("n", "<leader>db", "<cmd> DapToggleBreakpoint <CR>", { desc = "DAP Add breakpoint at line" })
-map("n", "<leader>dso", "<cmd> DapStepOver <CR>", { desc = "DAP Step over" })
-map("n", "<leader>dsi", "<cmd> DapStepIn <CR>", { desc = "DAP Step in" })
+map("n", "<leader>dC", [[:lua require("dap").run_to_cursor() <CR>]], { desc = "Run to Cursor" })
+map("n", "<leader>do", "<cmd> DapStepOver <CR>", { desc = "DAP Step over" })
+map("n", "<leader>di", "<cmd> DapStepIn <CR>", { desc = "DAP Step in" })
+map("n", "<leader>dO", "<cmd> DapStepOut <CR>", { desc = "DAP Out" })
 map("n", "<leader>dc", "<cmd> DapContinue <CR>", { desc = "DAP Continue" })
 map("n", "<leader>dt", "<cmd> DapTerminate <CR>", { desc = "DAP Terminate" })
 
-map("n", "<leader>y", [[:lua YankDiagnosticError()<CR>]], { noremap = true, silent = true, desc = "Copy LSP error" })
+map("n", "<leader>y", [[:lua YankDiagnosticError() <CR>]], { noremap = true, silent = true, desc = "Copy LSP error" })
 
 function YankDiagnosticError()
   vim.diagnostic.open_float()
