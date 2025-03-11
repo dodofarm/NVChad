@@ -33,6 +33,20 @@ map("n", "<leader>dO", "<cmd> DapStepOut <CR>", { desc = "DAP Out" })
 map("n", "<leader>dc", "<cmd> DapContinue <CR>", { desc = "DAP Continue" })
 map("n", "<leader>dt", "<cmd> DapTerminate <CR>", { desc = "DAP Terminate" })
 
+-- Leetcode
+map("n", "<leader>lm", "<cmd>Leet<CR>", { desc = "Open LeetCode/Menu" })
+map("n", "<leader>lc", "<cmd>Leet console<CR>", { desc = "Open Console" })
+map("n", "<leader>li", "<cmd>Leet info<CR>", { desc = "Question Info" })
+map("n", "<leader>lg", "<cmd>Leet lang<CR>", { desc = "Change Language" })
+map("n", "<leader>lr", "<cmd>Leet run<CR>", { desc = "Run Question" })
+map("n", "<leader>ls", "<cmd>Leet submit<CR>", { desc = "Submit Question" })
+map("n", "<leader>ll", "<cmd>Leet list<CR>", { desc = "Open Problem List" })
+map("n", "<leader>lo", "<cmd>Leet open<CR>", { desc = "Open in Browser" })
+map("n", "<leader>lx", "<cmd>Leet reset<CR>", { desc = "Reset Question" })
+map("n", "<leader>la", "<cmd>Leet last_submit<CR>", { desc = "Retrieve Last Submission" })
+map("n", "<leader>lj", "<cmd>Leet inject<CR>", { desc = "Re-inject Code" })
+map("n", "<leader>ld", "<cmd>Leet desc toggle<CR>", { desc = "Toggle Description" })
+
 map("n", "<leader>y", [[:lua YankDiagnosticError() <CR>]], { noremap = true, silent = true, desc = "Copy LSP error" })
 
 function YankDiagnosticError()

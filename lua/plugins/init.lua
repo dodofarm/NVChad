@@ -87,10 +87,12 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = "java", -- same as above for nvim-dap-python
   },
+  -- TODO: eventually use ruff/pyright instead of mypy for typechecking?
+  -- Also maybe disable mypys non typechecking
   {
     "mfussenegger/nvim-lint",
     enabled = true,
-    event = "VeryLazy",
+    ft = "python",
     config = function()
       require("lint").linters_by_ft = {
         python = { "mypy" },
@@ -105,25 +107,31 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = { "BufNewFile", "BufReadPre" },
     config = function()
       require "configs.lspconfig"
     end,
   },
   {
+    "windwp/nvim-ts-autotag",
+    -- should create "ftplugin" dirs
+    ft = {
+      "javascript",
+      "javascriptreact",
+      "typescript",
+      "typescriptreact",
+      "html",
+      "xml",
+      "markdown",
+    },
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+  },
+  {
     "nvim-treesitter/nvim-treesitter",
     opts = {
-      ensure_installed = {
-        "vim",
-        "lua",
-        "vimdoc",
-        "html",
-        "css",
-        "c",
-        "cpp",
-        "python",
-        "markdown",
-        "java",
-      },
+      auto_install = true,
     },
   },
   { "ThePrimeagen/vim-be-good" },
@@ -172,7 +180,26 @@ return {
       "nvim-lua/plenary.nvim",
       "MunifTanjim/nui.nvim",
     },
-    opts = {},
+    opts = {
+      injector = {
+        -- ["python3"] = {
+        --   before = true,
+        -- },
+        ["cpp"] = {
+          before = { "#include <bits/stdc++.h>", "using namespace std;" },
+          after = "int main() {}",
+        },
+        ["java"] = {
+          before = true,
+        },
+      },
+      storage = {
+        home = vim.loop.os_homedir() .. "/LC",
+      },
+      plugins = {
+        non_standalone = true,
+      },
+    },
   },
   {
     -- TODO: potentially add lowercase version and also remove the need to add a ":"
@@ -185,6 +212,60 @@ return {
       dofile(vim.g.base46_cache .. "todo")
       require("todo-comments").setup()
     end,
+  },
+  {
+    "yetone/avante.nvim",
+    -- event = "VeryLazy",
+    -- lazy = false,
+    version = false, -- Set this to "*" to always pull the latest release version, or set it to false to update to the latest code changes.
+  -- stylua: ignore
+    keys = { -- only load plugin on opening the sidebar
+      { "<leader>aa", mode = { "n", "v", "o" }, function() require("avante.api").ask() end, desc = "avante: ask" },
+    },
+
+    opts = {},
+    build = "make BUILD_FROM_SOURCE=true",
+    -- build = "make", --to avoid building from source
+    -- build = "powershell -ExecutionPolicy Bypass -File Build.ps1 -BuildFromSource false" -- for windows
+    dependencies = {
+      "stevearc/dressing.nvim",
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      --- The below dependencies are optional,
+      "nvim-telescope/telescope.nvim", -- for file_selector provider telescope
+      "hrsh7th/nvim-cmp", -- autocompletion for avante commands and mentions
+      "nvim-tree/nvim-web-devicons", -- or echasnovski/mini.icons
+      -- {
+      --   -- support for image pasting
+      --   "HakonHarnes/img-clip.nvim",
+      --   event = "VeryLazy",
+      --   opts = {
+      --     -- recommended settings
+      --     default = {
+      --       embed_image_as_base64 = false,
+      --       prompt_for_file_name = false,
+      --       drag_and_drop = {
+      --         insert_mode = true,
+      --       },
+      --       -- required for Windows users
+      --       use_absolute_path = true,
+      --     },
+      --   },
+      -- },
+      {
+        -- Make sure to set this up properly if you have lazy=true
+        "MeanderingProgrammer/render-markdown.nvim",
+        opts = {
+          file_types = { "markdown", "Avante" },
+        },
+        ft = { "markdown", "Avante" },
+        config = {
+          -- behavior = {
+          -- auto_suggestions = true,
+          -- },
+        },
+      },
+    },
   },
   {
     "marcussimonsen/let-it-snow.nvim",
