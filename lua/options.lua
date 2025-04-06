@@ -1,9 +1,10 @@
 require "nvchad.options"
 
-local opt = vim.opt
+-- vim.o.foldcolumn = "1" -- enable if want to enable foldcolumn
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevelstart = 99
+vim.o.foldenable = true
 
-opt.scrollback = 100000
--- add yours here!
+vim.o.scrollback = 100000
 
--- local o = vim.o
--- o.cursorlineopt ='both' -- to enable cursorline!
+-- vim.o.cursorlineopt = "both" -- to enable cursorline!

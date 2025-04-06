@@ -7,8 +7,19 @@ map({ "i", "n", "v" }, "<C-c>", "<esc>", { desc = "Make Ctrl+C behave exactly li
 map("i", "jk", "<ESC>")
 map("n", "<C-t>", "<cmd> tabnew <CR>", { desc = "Opens a new tab" })
 
+-- folding
+map("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
+map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
+map("n", "zK", function()
+  local winid = require("ufo").peekFoldedLinesUnderCursor()
+  if not winid then
+    vim.lsp.buf.hover()
+  end
+end, { desc = "Peek Fold" })
+
 -- neoscroll mappings
 local neoscroll = require "neoscroll"
+
 -- stylua: ignore
 for _, mode in ipairs { "n", "v", "x" } do
   map(mode, "<C-u>", function() neoscroll.ctrl_u { duration = 50 } end, { desc = "Scroll half page up" })
