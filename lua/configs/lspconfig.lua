@@ -44,19 +44,24 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
-
-lspconfig.pyright.setup {
+-- HACK: Using this for the Jedi server capabilities to get python documentation in LSP hover
+-- potentially use the standalone pylint + jedi lsp packages instead of pylsp?
+-- Also pylint currently overlaps partially with ruff - disable those errors globally!
+lspconfig.pylsp.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,
   capabilities = nvlsp.capabilities,
   settings = {
-    pyright = {
-      disableOrganizeImports = true, -- Using Ruff
-    },
-    python = {
-      analysis = {
-        ignore = { "*" }, -- Using Ruff
-        typeCheckingMode = "off", -- Using mypy
+    pylsp = {
+      plugins = {
+        -- Disable other linters/formatters as ruff will handle them
+        mccabe = { enabled = true }, -- analyze code complexity
+        pylint = { enabled = true },
+        autopep8 = { enabled = false },
+        flake8 = { enabled = false },
+        pyflakes = { enabled = false },
+        yapf = { enabled = false },
+        pycodestyle = { enabled = false },
       },
     },
   },

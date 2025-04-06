@@ -88,7 +88,7 @@ return {
     ft = "java", -- same as above for nvim-dap-python
   },
   -- TODO: eventually use ruff/pyright instead of mypy for typechecking?
-  -- Also maybe disable mypys non typechecking
+  -- Also maybe disable mypys non typechecking features since this overlaps with LSP
   {
     "mfussenegger/nvim-lint",
     enabled = true,
