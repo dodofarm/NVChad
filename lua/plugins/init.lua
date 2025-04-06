@@ -181,6 +181,7 @@ return {
       "MunifTanjim/nui.nvim",
     },
     opts = {
+      lang = "python3",
       injector = {
         -- ["python3"] = {
         --   before = true,
