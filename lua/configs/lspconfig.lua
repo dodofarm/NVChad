@@ -33,7 +33,7 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
 })
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "ts_ls", "clangd", "ruff", "tailwindcss", "eslint" }
+local servers = { "html", "cssls", "ts_ls", "clangd", "ruff", "tailwindcss", "eslint", "rust_analyzer" }
 
 local nvlsp = require "nvchad.configs.lspconfig"
 
@@ -56,7 +56,7 @@ lspconfig.pylsp.setup {
       plugins = {
         -- Disable other linters/formatters as ruff will handle them
         mccabe = { enabled = true }, -- analyze code complexity
-        pylint = { enabled = true },
+        pylint = { enabled = false },
         autopep8 = { enabled = false },
         flake8 = { enabled = false },
         pyflakes = { enabled = false },
