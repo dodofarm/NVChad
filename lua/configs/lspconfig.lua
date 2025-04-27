@@ -45,8 +45,6 @@ for _, lsp in ipairs(servers) do
   }
 end
 -- HACK: Using this for the Jedi server capabilities to get python documentation in LSP hover
--- potentially use the standalone pylint + jedi lsp packages instead of pylsp?
--- Also pylint currently overlaps partially with ruff - disable those errors globally!
 lspconfig.pylsp.setup {
   on_attach = nvlsp.on_attach,
   on_init = nvlsp.on_init,

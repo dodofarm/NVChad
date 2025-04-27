@@ -89,6 +89,7 @@ return {
   },
   -- TODO: eventually use ruff/pyright instead of mypy for typechecking?
   -- Also maybe disable mypys non typechecking features since this overlaps with LSP
+  -- Also pylint currently overlaps partially with ruff - disable those errors globally!
   {
     "mfussenegger/nvim-lint",
     enabled = true,
