@@ -196,7 +196,7 @@ return {
         },
       },
       storage = {
-        home = vim.loop.os_homedir() .. "/LC",
+        home = vim.loop.os_homedir() .. "/LeetCode-DSA",
       },
       plugins = {
         non_standalone = true,
