@@ -33,7 +33,8 @@ vim.api.nvim_create_autocmd({ "CursorMoved", "DiagnosticChanged" }, {
 })
 local lspconfig = require "lspconfig"
 
-local servers = { "html", "cssls", "ts_ls", "clangd", "ruff", "tailwindcss", "eslint", "rust_analyzer" }
+local servers =
+  { "html", "cssls", "ts_ls", "clangd", "ruff", "tailwindcss", "eslint", "rust_analyzer", "ruby_lsp", "rubocop" }
 
 local nvlsp = require "nvchad.configs.lspconfig"
 
