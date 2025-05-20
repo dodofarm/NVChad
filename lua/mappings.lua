@@ -6,6 +6,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "n", "v" }, "<C-c>", "<esc>", { desc = "Make Ctrl+C behave exactly like escape." })
 map("i", "jk", "<ESC>")
 map("n", "<C-t>", "<cmd> tabnew <CR>", { desc = "Opens a new tab" })
+map("n", "<F13>", "<C-i>", { desc = "Support for terminals that can't distinguish between <C-i> and <Tab>" })
 
 -- folding
 map("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
