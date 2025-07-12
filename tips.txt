@@ -1,0 +1,1 @@
+For pylint not detecting/working with pydantic module removing it from .local mason directory (bin and folder) and reinstalling worked

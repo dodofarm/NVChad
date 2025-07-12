@@ -99,6 +99,10 @@ return {
         python = { "mypy", "pylint" },
       }
 
+      -- Disable fix-me hints since that's already handled by todo-comments.nvim
+      local pylint = require("lint").linters.pylint
+      pylint.args = vim.list_extend(pylint.args, { "--disable=W0511" })
+
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
           require("lint").try_lint()
