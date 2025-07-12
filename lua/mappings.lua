@@ -8,6 +8,8 @@ map("i", "jk", "<ESC>")
 map("n", "<C-t>", "<cmd> tabnew <CR>", { desc = "Opens a new tab" })
 map("n", "<F13>", "<C-i>", { desc = "Support for terminals that can't distinguish between <C-i> and <Tab>" })
 
+-- TODO: Add toggle vim diagnostics & LSP (temporary)
+
 -- folding
 map("n", "zR", require("ufo").openAllFolds, { desc = "Open all folds" })
 map("n", "zM", require("ufo").closeAllFolds, { desc = "Close all folds" })
@@ -25,10 +27,10 @@ local neoscroll = require "neoscroll"
 for _, mode in ipairs { "n", "v", "x" } do
   map(mode, "<C-u>", function() neoscroll.ctrl_u { duration = 50 } end, { desc = "Scroll half page up" })
   map(mode, "<C-d>", function() neoscroll.ctrl_d { duration = 50 } end, { desc = "Scroll half page down" })
-  map(mode, "<C-b>", function() neoscroll.ctrl_b { duration = 450 } end, { desc = "Scroll page up" })
-  map(mode, "<C-f>", function() neoscroll.ctrl_f { duration = 450 } end, { desc = "Scroll page down" })
-  map(mode, "<C-y>", function() neoscroll.scroll(-0.1, { move_cursor = false, duration = 100 }) end, { desc = "Scroll up small" })
-  map(mode, "<C-e>", function() neoscroll.scroll(0.1, { move_cursor = false, duration = 100 }) end, { desc = "Scroll down small" })
+  map(mode, "<C-b>", function() neoscroll.ctrl_b { duration = 250 } end, { desc = "Scroll page up" })
+  map(mode, "<C-f>", function() neoscroll.ctrl_f { duration = 250 } end, { desc = "Scroll page down" })
+  map(mode, "<C-y>", function() neoscroll.scroll(-0.1, { move_cursor = false, duration = 50 }) end, { desc = "Scroll up small" })
+  map(mode, "<C-e>", function() neoscroll.scroll(0.1, { move_cursor = false, duration = 50 }) end, { desc = "Scroll down small" })
   map(mode, "zt", function() neoscroll.zt { half_win_duration = 250 } end, { desc = "Scroll cursor to top" })
   map(mode, "zz", function() neoscroll.zz { half_win_duration = 250 } end, { desc = "Scroll cursor to center" })
   map(mode, "zb", function() neoscroll.zb { half_win_duration = 250 } end, { desc = "Scroll cursor to bottom" })
